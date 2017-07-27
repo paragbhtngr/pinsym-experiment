@@ -51,10 +51,14 @@ export default class Selector extends React.Component {
                                 <option defaultValue hidden>Select a Display</option>
                                 {this.state.modes.map(makeOption)}
                             </select>
+                            <br/>
+                            <br/>
                             <select value={this.state.client} onChange={this.handleClientChange}>
                                 <option defaultValue hidden>Select a client</option>
                                 {this.state.clients.map(makeOption)}
                             </select>
+                            <br/>
+                            <br/>
                             <div>
                                 <p>Mode: {this.state.mode}</p>
                                 <p>Client: {this.state.client}</p>                           

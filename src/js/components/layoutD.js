@@ -43,28 +43,26 @@ export default class Layout extends React.Component {
     }
 
     getActiveComments(){
-        // return DataStore.getSegmentsByClientCode(this.state.clientName, DataStore.getActiveSegment()).map((x) => {
-        //     console.log("COMMENT::", x.code);
-        //     return (<h1>{x.code}</h1>);
-        // });
-        let d = DataStore.getSegmentsByClientCode(this.state.clientName, DataStore.getActiveSegment());  
-        if(d[0]) {
-            d.sort(function(a, b) {
-                return (-1*(new Date(a.modifiedAt) - new Date(b.modifiedAt)));
-            });
+        let d = DataStore.getSegmentsByClientCode(this.state.clientName, DataStore.getActiveSegment());
+        d.sort(function(a, b) {
+            return (-1*(new Date(a.modifiedAt) - new Date(b.modifiedAt)));
+        });
 
+        if(d[0]) {
             console.log("D", d[0].createdAt);
-            if( new Date(d[1].createdAt).getTime() >= (Date.now() - 60*1000) ) {
+            if( new Date(d[0].createdAt).getTime() >= (Date.now() - 60*1000) ) {
                 var newD = d.shift();
                 d.sort(function(a, b) {
                     return (-1*(a.upvotes - b.upvotes));
                 });
                 d.unshift(newD);
+            } else {
+                d.sort(function(a, b) {
+                    return (-1*(a.upvotes - b.upvotes));
+                });
             }
-            
-            
-            return d.map(this.makeComment);
-        }      
+        }
+        return d.map(this.makeComment);  
     }
 
     handleNewCommentChange(e) {
@@ -107,9 +105,10 @@ export default class Layout extends React.Component {
                     <br/>
                     <div
                         style={{
-                            background: "lightGrey",
                             padding: "20px",
                             margin: "-20px",
+                            maxHeight: "590px",
+                            overflowY: "scroll",
                         }}
                     >
                         {this.getActiveComments()}
@@ -120,13 +119,15 @@ export default class Layout extends React.Component {
                     style={{
                         padding: "20px",
                         paddingTop: "0px",
+                        position: "absolute",
+                        bottom: "0",
+                        right: "0",
                     }}
                 >   
-                    <h4>Your message {DataStore.getActiveSegment() ? ("about " + DataStore.getActiveSegment()): null} </h4>
                     <textarea 
                         className="col-md-12"
                         rows="10"
-                        placeholder="Add a comment"
+                        placeholder={"Your message" + (DataStore.getActiveSegment() ? (" about " + DataStore.getActiveSegment()): "")}
                         value={this.state.newComment}
                         onChange={this.handleNewCommentChange}
                     />

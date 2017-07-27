@@ -117,7 +117,7 @@ var paragraphs = {
       "createdAt": "2017-04-20",
       "modifiedAt": "2017-04-20",
       "upvotes": 3,
-      "comment": "1. need to install more fun games to entertain resident. 2. Have to patient to interact with resident. 3. During interact with resident cheer them to play. 4. Mostly resident like to play more on desired games.",
+      "comment": "1. need to install more fun games to entertain resident. \n2. Have to patient to interact with resident. \n3. During interact with resident cheer them to play. \n4. Mostly resident like to play more on desired games.",
       "id": "cfa02fb7-e22a-4e04-a813-ba64d1a18738"
     },
     {

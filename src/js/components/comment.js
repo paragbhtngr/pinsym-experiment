@@ -30,11 +30,13 @@ export default class Comment extends React.Component {
                 <span 
                     className="badge"
                     style={{
-                        float: "right",
-                        marginTop: "10px",
+                        marginBottom: "10px",
                         background: isActiveComment? "#1976d2" : "lightGrey",
                     }}
-                >{DataStore.getParagraphsByID(this.props.id)[0].upvotes}</span>
+                >
+                    {" " + DataStore.getParagraphsByID(this.props.id)[0].upvotes + " "} 
+                    Upvotes
+                </span>
             )
         } else {
             var date = (
@@ -58,10 +60,10 @@ export default class Comment extends React.Component {
                 }}
             >
                 {date}
-                {upvoteBadge}
                 <p style={{
                     width: "95%",
                 }}>{DataStore.getParagraphsByID(this.props.id)[0].comment.substr(0,150) + "..."}</p>
+                {upvoteBadge}
             </div>
         );
     }

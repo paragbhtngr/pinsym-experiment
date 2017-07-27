@@ -28,24 +28,25 @@ export default class ActiveComment extends React.Component {
         if(this.props.hasUpvotes){
             var upvote = (
                 <div
-                className="col-md-1" 
                 style={{
                     float: "right",
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
+                    paddingLeft: "50px",
                 }}>
                     <span 
                         className="badge"
                         style={{
                             height: "30px",
-                            width: "30px",
-                            borderRadius: "200px",
+                            borderRadius: "250px",
                             fontSize: "14px",
                             paddingTop: "8px",
+                            paddingLeft: "20px",
+                            paddingRight: "20px",
                             marginBottom: "10px",
                         }}
-                    >{this.state.data.upvotes}</span>
+                    >{this.state.data.upvotes} Upvotes</span>
                     <button 
                         type="button" 
                         className="btn btn-sm btn-success"
@@ -59,7 +60,8 @@ export default class ActiveComment extends React.Component {
                             marginBottom: "20px",
                             float: "right"
                         }}
-                    >Upvote</button>
+                    >
+                    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Upvote</button>
 
                 </div>
             )
@@ -78,17 +80,21 @@ export default class ActiveComment extends React.Component {
                 style={{
                     width: "100%",
                     paddingTop: "10px",
+                    display: "flex",
                 }}
             >
-                {date}
+
                 <div 
-                    className="col-md-11"
                     style={{
-                        paddingLeft:"0"
+                        paddingLeft:"0",
+                        flexGrow: 1,
                     }}
                 >
+                    {date}                    
                     <p style={{                      
-                    }}>{this.state.data.comment}</p>
+                    }}>{this.state.data.comment.split('\n').map((item, key) => {
+                            return <span key={key}>{item}<br/></span>
+                        })}</p>
                 </div>
                 
                 {upvote}

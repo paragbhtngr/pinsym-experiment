@@ -49,6 +49,9 @@ export default class Sidebar extends React.Component {
             );
         }
         let makeCategory = (x, index) => {
+            if(DataStore.getActiveSegment() === x) {
+                var isActiveSegment = true;
+            }
             return (
                 <a
                     onClick={() => {
@@ -65,7 +68,10 @@ export default class Sidebar extends React.Component {
                             
                         }}
                     >
-                        <h5>{x.toUpperCase()}</h5>
+                        <h5 
+                        style={{
+                            color: isActiveSegment? "#1976d2": "grey",
+                        }}>{x.toUpperCase()}</h5>
                     </div>                    
                 </a>   
             );

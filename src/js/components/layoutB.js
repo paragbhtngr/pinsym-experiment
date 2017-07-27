@@ -35,9 +35,10 @@ export default class Layout extends React.Component {
 
     componentWillMount() {
         DataStore.on("change", () => {
+            var d = DataStore.getParagraphsByClient(this.state.clientName)
             this.setState({
                 activeCommentID: DataStore.getActiveCommentID(),
-                data: DataStore.getParagraphsByClient(this.state.clientName),                
+                data: d,                
             })
         })
     }
@@ -86,9 +87,10 @@ export default class Layout extends React.Component {
                     <br/>
                     <div
                         style={{
-                            background: "lightGrey",
                             padding: "20px",
-                            margin: "-20px",
+                            margin: "-20px",                            
+                            maxHeight: "590px",
+                            overflowY: "scroll",
                         }}
                     >
                         {activeComment}
@@ -100,13 +102,15 @@ export default class Layout extends React.Component {
                     style={{
                         padding: "20px",
                         paddingTop: "0px",
+                        position: "absolute",
+                        bottom: "0",
+                        right: "0",
                     }}
                 >
-                    <h4>Your message</h4>
                     <textarea 
                         className="col-md-12"
                         rows="10"
-                        placeholder="Add a comment"
+                        placeholder="Your message"
                         value={this.state.newComment}
                         onChange={this.handleNewCommentChange}
                     />

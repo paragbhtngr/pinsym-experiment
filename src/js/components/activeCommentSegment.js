@@ -23,24 +23,25 @@ export default class ActiveCommentSegment extends React.Component {
         if(this.props.hasUpvotes){
             var upvote = (
                 <div
-                className="col-md-1" 
                 style={{
                     float: "right",
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
+                    paddingLeft: "50px",
                 }}>
                     <span 
                         className="badge"
                         style={{
                             height: "30px",
-                            width: "30px",
-                            borderRadius: "200px",
+                            borderRadius: "250px",
                             fontSize: "14px",
                             paddingTop: "8px",
+                            paddingLeft: "20px",
+                            paddingRight: "20px",
                             marginBottom: "10px",
                         }}
-                    >{DataStore.getSegmentsByID(this.props.id)[0].upvotes}</span>
+                    >{DataStore.getSegmentsByID(this.props.id)[0].upvotes} Upvotes</span>
                     <button 
                         type="button" 
                         className="btn btn-sm btn-success"
@@ -70,16 +71,17 @@ export default class ActiveCommentSegment extends React.Component {
                 style={{
                     width: "100%",
                     paddingTop: "10px",
+                    display: "flex",
                 }}
             >
-                {date}
-
+                <br/>
                 <div
-                    className="col-md-11"
                     style={{
-                        paddingLeft:"0"
+                        paddingLeft:"0",
+                        flexGrow: 1,
                     }}
-                >
+                >   
+                    {date}
                     <p style={{
                     }}>{DataStore.getSegmentsByID(this.props.id)[0].comment}</p>
                 </div>

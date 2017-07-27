@@ -17,11 +17,29 @@ export default class Sidebar extends React.Component {
 
     componentWillMount() {
         DataStore.on("change", () => {
+            var d = DataStore.getParagraphsByClient(this.state.clientName);
+            d.sort(function(a, b) {
+                return (-1*(new Date(a.modifiedAt) - new Date(b.modifiedAt)));
+            });
+
+            if(d[0]) {
+                // console.log("D", d[0].createdAt);
+                if( new Date(d[0].createdAt).getTime() >= (Date.now() - 60*1000) ) {
+                    var newD = d.shift();
+                    d.sort(function(a, b) {
+                        return (-1*(a.upvotes - b.upvotes));
+                    });
+                    d.unshift(newD);
+                } else {
+                    d.sort(function(a, b) {
+                        return (-1*(a.upvotes - b.upvotes));
+                    });
+                }
+            }
+
             this.setState({
                 activeCommentID: DataStore.getActiveCommentID(),
-                data: DataStore.getParagraphsByClient(this.state.clientName).sort(function(a, b) {
-                    return (-1*(a.upvotes - b.upvotes));
-                }),                
+                data: d,                
             })
         })
     }
@@ -66,6 +84,7 @@ export default class Sidebar extends React.Component {
             >   
                 <h4>Messages from previous volunteers</h4>
                 <br/>
+                <p>Most Upvoted</p>
                 {this.state.data.map(makeComment)}
             </div>
         );
