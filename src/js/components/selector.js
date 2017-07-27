@@ -26,7 +26,8 @@ export default class Selector extends React.Component {
 
     handleRedirect() {
         if(this.state.mode && this.state.client) {
-            window.location = '/#/'+this.state.mode+'/'+this.state.client;
+            window.location.reload(true);
+            window.location.href = '/#/'+this.state.mode+'/'+this.state.client;
         } else {
             alert("Please select a mode and client");
         }

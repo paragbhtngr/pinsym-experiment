@@ -36,7 +36,8 @@ export default class ActiveCommentSegment extends React.Component {
                             height: "30px",
                             width: "30px",
                             borderRadius: "200px",
-                            fontSize: "24px",
+                            fontSize: "14px",
+                            paddingTop: "8px",
                             marginBottom: "10px",
                         }}
                     >{DataStore.getSegmentsByID(this.props.id)[0].upvotes}</span>

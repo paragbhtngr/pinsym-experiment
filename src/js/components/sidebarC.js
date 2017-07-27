@@ -49,13 +49,16 @@ export default class Sidebar extends React.Component {
             );
         }
         let makeCategory = (x, index) => {
+            if(DataStore.getActiveSegment() === x) {
+                var isActiveSegment = true;
+            }
             return (
                 <a
                     onClick={() => {
                         DataStore.setActiveSegment(x);
                     }}
                     style={{
-                        textDecoration: "none" 
+                        textDecoration: "none", 
                     }}
                 >   
                     <div
@@ -65,7 +68,11 @@ export default class Sidebar extends React.Component {
                             
                         }}
                     >
-                        <h4>{x.toUpperCase()}</h4>
+                        <h5
+                            style={{
+                                color: isActiveSegment? "#1976d2": "grey",
+                            }}
+                        >{x.toUpperCase()}</h5>
                     </div>                    
                 </a>   
             );
@@ -77,12 +84,12 @@ export default class Sidebar extends React.Component {
                 paddingTop: "0px",
                 borderRight: "1px solid lightGrey",
                 background: "lightGrey",
-                height: "100vh",
+                height: "102vh",
                 overflowY: "scroll",
-                paddingTop: "20px",
+                paddingTop: "30px",
             }}
             >   
-                <h3>What previous volunteers want you to know</h3>
+                <h4>What previous volunteers want you to know</h4>
                 <br/>
                 {DataStore.getSegmentNames().map(makeCategory)}
             </div>

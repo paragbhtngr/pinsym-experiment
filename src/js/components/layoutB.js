@@ -10,7 +10,7 @@ export default class Layout extends React.Component {
     constructor(props) {
         super()
         this.state = {
-            mode: "B",
+            mode: "9B08X",
             clientName: props.match.params.client,
             activeCommentID: DataStore.getActiveCommentID(),
             data: DataStore.getParagraphsByClient(props.match.params.client),
@@ -82,7 +82,7 @@ export default class Layout extends React.Component {
                         float: "right",
                         color: "lightGrey",
                     }}>{this.state.mode} </h3>
-                    <h3> {this.props.match.params.client} </h3>
+                    <h3> <i className="fa fa-user-circle-o" aria-hidden="true"></i> {this.props.match.params.client} </h3>
                     <hr/>
                      {activeComment} 
                 </div>

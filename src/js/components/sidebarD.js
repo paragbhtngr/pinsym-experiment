@@ -65,7 +65,7 @@ export default class Sidebar extends React.Component {
                             
                         }}
                     >
-                        <h4>{x.toUpperCase()}</h4>
+                        <h5>{x.toUpperCase()}</h5>
                     </div>                    
                 </a>   
             );
@@ -77,12 +77,12 @@ export default class Sidebar extends React.Component {
                 paddingTop: "0px",
                 borderRight: "1px solid lightGrey",
                 background: "lightGrey",
-                height: "100vh",
+                height: "102vh",
                 overflowY: "scroll",
-                paddingTop: "20px",
+                paddingTop: "30px",
             }}
             >
-                <h3>What previous volunteers want you to know</h3>
+                <h4>What previous volunteers want you to know</h4>
                 <br/>
                 {DataStore.getSegmentNames().map(makeCategory)}
             </div>

@@ -59,12 +59,12 @@ export default class Sidebar extends React.Component {
                 paddingTop: "0px",
                 borderRight: "1px solid lightGrey",
                 background: "lightGrey",
-                height: "100vh",
+                height: "102vh",
                 overflowY: "scroll",
-                paddingTop: "20px",
+                paddingTop: "30px",
             }}
             >   
-                <h3>Messages from previous volunteers</h3>
+                <h4>Messages from previous volunteers</h4>
                 <br/>
                 {this.state.data.map(makeComment)}
             </div>

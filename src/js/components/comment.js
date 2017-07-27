@@ -21,13 +21,18 @@ export default class Comment extends React.Component {
     }
 
     render() {
+        if(DataStore.getActiveCommentID() === this.props.id) {
+            var isActiveComment = true;
+        }
+
         if(this.props.hasUpvotes){
             var upvoteBadge = (
                 <span 
                     className="badge"
                     style={{
                         float: "right",
-                        marginTop: "10px"
+                        marginTop: "10px",
+                        background: isActiveComment? "#1976d2" : "lightGrey",
                     }}
                 >{DataStore.getParagraphsByID(this.props.id)[0].upvotes}</span>
             )
@@ -38,15 +43,18 @@ export default class Comment extends React.Component {
                     display: "inline",
                     marginBottom: "10px",
                     fontWeight: "bold",
+                    color: isActiveComment? "#1976d2":"grey",
                 }}><Moment format="DD/MM/YYYY">{DataStore.getParagraphsByID(this.props.id)[0].createdAt}</Moment></h5>
             )
         }
+
         return ( 
             <div
                 className="container panel panel-default"
                 style={{
                     width: "100%",
                     paddingTop: "10px",
+                    color: isActiveComment? "black":"grey",
                 }}
             >
                 {date}
