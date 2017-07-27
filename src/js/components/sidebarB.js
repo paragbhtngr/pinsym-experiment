@@ -66,6 +66,7 @@ export default class Sidebar extends React.Component {
                         id={x.id}
                         filter={this.props.sort}
                         hasUpvotes={true}
+                        userCreated={this.props.userCreated}
                     />
                 </a>   
             );

@@ -50,9 +50,11 @@ class DataStore extends EventEmitter {
     }
 
     getParagraphsByID(id) {
-        return this.paragraphs.filter(function (el) {
+        var a = this.paragraphs.filter(function (el) {
             return el.id === id;
         });
+        console.log("getting Paragraph by ID:", a);
+        return a;
     }
 
     getSegmentsByID(id) {
@@ -69,7 +71,8 @@ class DataStore extends EventEmitter {
     }
 
     addParagraph(para) {
-        console.log("adding paragraph");
+        para.userCreated = true;
+        console.log("adding paragraph", para);
         this.paragraphs.push(para);
         this.paragraphs.sort(function(a, b) {
             return (new Date(a.modifiedAt) - new Date(b.modifiedAt));
@@ -81,6 +84,7 @@ class DataStore extends EventEmitter {
     }
 
     addSegment(seg) {
+        seg.userCreated = true;
         this.segments.push(seg);
         this.segments.sort(function(a, b) {
             return (new Date(a.modifiedAt) - new Date(b.modifiedAt));

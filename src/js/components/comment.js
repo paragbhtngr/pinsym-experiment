@@ -49,7 +49,7 @@ export default class Comment extends React.Component {
                 }}><Moment format="DD/MM/YYYY">{DataStore.getParagraphsByID(this.props.id)[0].createdAt}</Moment></h5>
             )
         }
-
+        console.log("THIS COMMENT", this);
         return ( 
             <div
                 className="container panel panel-default"

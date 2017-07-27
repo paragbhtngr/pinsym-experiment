@@ -25,6 +25,25 @@ export default class ActiveComment extends React.Component {
     }
 
     render() {
+        console.log("userCreated", this);
+        if(!this.state.data.userCreated){
+            var upvoteButton = (
+                <button 
+                    type="button" 
+                    className="btn btn-sm btn-success"
+                    ref={"upvotebtn"+this.props.id}
+                    disabled={this.state.data.upvoted? true:false}
+                    onClick={ ()=> {
+                        DataStore.upvoteParagraph(this.props.id);
+                        this.refs["upvotebtn"+this.props.id].setAttribute("disabled", "disabled");
+                    }}
+                    style={{
+                        marginBottom: "20px",
+                        float: "right"
+                    }}
+                ><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Upvote</button>
+            )
+        }
         if(this.props.hasUpvotes){
             var upvote = (
                 <div
@@ -47,21 +66,8 @@ export default class ActiveComment extends React.Component {
                             marginBottom: "10px",
                         }}
                     >{this.state.data.upvotes} Upvotes</span>
-                    <button 
-                        type="button" 
-                        className="btn btn-sm btn-success"
-                        ref={"upvotebtn"+this.props.id}
-                        disabled={this.state.data.upvoted? true:false}
-                        onClick={ ()=> {
-                            DataStore.upvoteParagraph(this.props.id);
-                            this.refs["upvotebtn"+this.props.id].setAttribute("disabled", "disabled");
-                        }}
-                        style={{
-                            marginBottom: "20px",
-                            float: "right"
-                        }}
-                    >
-                    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Upvote</button>
+                    {upvoteButton}
+                    
 
                 </div>
             )
@@ -96,7 +102,6 @@ export default class ActiveComment extends React.Component {
                             return <span key={key}>{item}<br/></span>
                         })}</p>
                 </div>
-                
                 {upvote}
             </div>
         );

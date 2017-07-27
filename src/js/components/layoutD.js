@@ -144,6 +144,7 @@ export default class Layout extends React.Component {
                                     code: DataStore.getActiveSegment(),
                                     comment: this.state.newComment,
                                     id: UUID(),
+                                    userCreated: true,
                                 })
                             }
                             

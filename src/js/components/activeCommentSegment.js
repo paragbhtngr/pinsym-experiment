@@ -20,6 +20,22 @@ export default class ActiveCommentSegment extends React.Component {
     }
 
     render() {
+        if(!DataStore.getSegmentsByID(this.props.id)[0].userCreated) {
+            var upvoteButton = (
+                <button 
+                    type="button" 
+                    className="btn btn-sm btn-success"
+                    ref={"upvotebtn"+this.props.id}
+                    disabled={DataStore.getSegmentsByID(this.props.id)[0].upvoted? true:false}
+                    onClick={ ()=> {
+                        DataStore.upvoteSegment(this.props.id);
+                    }}
+                    style={{
+                        marginBottom: "20px"
+                    }}
+                >Upvote</button>
+            )
+        }
         if(this.props.hasUpvotes){
             var upvote = (
                 <div
@@ -42,18 +58,7 @@ export default class ActiveCommentSegment extends React.Component {
                             marginBottom: "10px",
                         }}
                     >{DataStore.getSegmentsByID(this.props.id)[0].upvotes} Upvotes</span>
-                    <button 
-                        type="button" 
-                        className="btn btn-sm btn-success"
-                        ref={"upvotebtn"+this.props.id}
-                        disabled={DataStore.getSegmentsByID(this.props.id)[0].upvoted? true:false}
-                        onClick={ ()=> {
-                            DataStore.upvoteSegment(this.props.id);
-                        }}
-                        style={{
-                            marginBottom: "20px"
-                        }}
-                    >Upvote</button>
+                    {upvoteButton}
                 </div>
             )
         } else {

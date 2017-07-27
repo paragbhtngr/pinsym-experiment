@@ -126,6 +126,7 @@ export default class Layout extends React.Component {
                                     upvotes: 0,
                                     comment: this.state.newComment,
                                     id: UUID(),
+                                    userCreated: "true",
                                 })
                             }
                             
