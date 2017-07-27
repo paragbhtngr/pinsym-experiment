@@ -93,9 +93,10 @@ export default class Layout extends React.Component {
                         paddingTop: "0px",
                     }}
                 >
+                    <h4>Your message</h4>
                     <textarea 
                         className="col-md-12"
-                        rows="5"
+                        rows="10"
                         placeholder="Add a comment"
                         value={this.state.newComment}
                         onChange={this.handleNewCommentChange}
@@ -119,7 +120,7 @@ export default class Layout extends React.Component {
                         style={{
                             marginTop: "20px"
                         }}
-                    >Submit Comment</button>                    
+                    >Submit</button>                    
                 </div>
             </div>
         );

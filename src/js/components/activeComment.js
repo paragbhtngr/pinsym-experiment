@@ -26,30 +26,51 @@ export default class ActiveComment extends React.Component {
 
     render() {
         if(this.props.hasUpvotes){
-            var upvoteBadge = (
-                <span 
-                    className="badge"
-                    style={{
-                        float: "right",
-                    }}
-                >{this.state.data.upvotes}</span>
+            var upvote = (
+                <div
+                className="col-md-1" 
+                style={{
+                    float: "right",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                }}>
+                    <span 
+                        className="badge"
+                        style={{
+                            height: "30px",
+                            width: "30px",
+                            borderRadius: "200px",
+                            fontSize: "24px",
+                            marginBottom: "10px",
+                        }}
+                    >{this.state.data.upvotes}</span>
+                    <button 
+                        type="button" 
+                        className="btn btn-sm btn-success"
+                        ref={"upvotebtn"+this.props.id}
+                        disabled={this.state.data.upvoted? true:false}
+                        onClick={ ()=> {
+                            DataStore.upvoteParagraph(this.props.id);
+                            this.refs["upvotebtn"+this.props.id].setAttribute("disabled", "disabled");
+                        }}
+                        style={{
+                            marginBottom: "20px",
+                            float: "right"
+                        }}
+                    >Upvote</button>
+
+                </div>
             )
-            var upvoteButton = (
-                <button 
-                    type="button" 
-                    className="btn btn-large btn-success"
-                    ref={"upvotebtn"+this.props.id}
-                    disabled={this.state.data.upvoted? true:false}
-                    onClick={ ()=> {
-                        DataStore.upvoteParagraph(this.props.id);
-                        this.refs["upvotebtn"+this.props.id].setAttribute("disabled", "disabled");
-                    }}
-                    style={{
-                        marginBottom: "20px"
-                    }}
-                >Upvote</button>
+        } else {
+            var date = (
+                <h4 style={{
+                    width: "70%",
+                    display: "inline",
+                    marginBottom: "10px",
+                }}><Moment format="DD/MM/YYYY">{this.state.data.createdAt}</Moment></h4>
             )
-        } 
+        }
         return ( 
             <div
                 className="container panel panel-default"
@@ -58,15 +79,18 @@ export default class ActiveComment extends React.Component {
                     paddingTop: "10px",
                 }}
             >
-                <h4 style={{
-                    width: "70%",
-                    display: "inline",
-                }}><Moment format="DD/MM/YYYY h:mm a">{this.state.data.createdAt}</Moment></h4>
-                {upvoteBadge}
-                <p style={{
-                    marginTop: "10px"
-                }}>{this.state.data.comment}</p>
-                {upvoteButton}
+                {date}
+                <div 
+                    className="col-md-11"
+                    style={{
+                        paddingLeft:"0"
+                    }}
+                >
+                    <p style={{                      
+                    }}>{this.state.data.comment}</p>
+                </div>
+                
+                {upvote}
             </div>
         );
     }

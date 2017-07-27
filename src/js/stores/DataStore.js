@@ -15,7 +15,7 @@ class DataStore extends EventEmitter {
         this.segments = Segments.values.sort(function(a, b) {
             return (-1*(new Date(a.modifiedAt) - new Date(b.modifiedAt)));
         });
-        this.segmentNames = SegmentNames.sort();
+        this.segmentNames = SegmentNames.sort().reverse();
         this.clientNames =  ClientNames.sort();
         this.activeCommentID = undefined;
         this.activeSegment = undefined;

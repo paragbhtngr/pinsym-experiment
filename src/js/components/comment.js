@@ -27,10 +27,20 @@ export default class Comment extends React.Component {
                     className="badge"
                     style={{
                         float: "right",
+                        marginTop: "10px"
                     }}
                 >{DataStore.getParagraphsByID(this.props.id)[0].upvotes}</span>
             )
-        } 
+        } else {
+            var date = (
+                <h5 style={{
+                    width: "70%",
+                    display: "inline",
+                    marginBottom: "10px",
+                    fontWeight: "bold",
+                }}><Moment format="DD/MM/YYYY">{DataStore.getParagraphsByID(this.props.id)[0].createdAt}</Moment></h5>
+            )
+        }
         return ( 
             <div
                 className="container panel panel-default"
@@ -39,14 +49,11 @@ export default class Comment extends React.Component {
                     paddingTop: "10px",
                 }}
             >
-                <h4 style={{
-                    width: "70%",
-                    display: "inline",
-                }}><Moment format="DD/MM/YYYY h:mm a">{DataStore.getParagraphsByID(this.props.id)[0].createdAt}</Moment></h4>
+                {date}
                 {upvoteBadge}
                 <p style={{
-                    marginTop: "10px"
-                }}>{DataStore.getParagraphsByID(this.props.id)[0].comment}</p>
+                    width: "95%",
+                }}>{DataStore.getParagraphsByID(this.props.id)[0].comment.substr(0,150) + "..."}</p>
             </div>
         );
     }

@@ -79,9 +79,11 @@ export default class Sidebar extends React.Component {
                 background: "lightGrey",
                 height: "100vh",
                 overflowY: "scroll",
-                paddingTop: "35px",
+                paddingTop: "20px",
             }}
             >
+                <h3>What previous volunteers want you to know</h3>
+                <br/>
                 {DataStore.getSegmentNames().map(makeCategory)}
             </div>
         );

@@ -21,29 +21,48 @@ export default class ActiveCommentSegment extends React.Component {
 
     render() {
         if(this.props.hasUpvotes){
-            var upvoteBadge = (
-                <span 
-                    className="badge"
-                    style={{
-                        float: "right",
-                    }}
-                >{DataStore.getSegmentsByID(this.props.id)[0].upvotes}</span>
+            var upvote = (
+                <div
+                className="col-md-1" 
+                style={{
+                    float: "right",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                }}>
+                    <span 
+                        className="badge"
+                        style={{
+                            height: "30px",
+                            width: "30px",
+                            borderRadius: "200px",
+                            fontSize: "24px",
+                            marginBottom: "10px",
+                        }}
+                    >{DataStore.getSegmentsByID(this.props.id)[0].upvotes}</span>
+                    <button 
+                        type="button" 
+                        className="btn btn-sm btn-success"
+                        ref={"upvotebtn"+this.props.id}
+                        disabled={DataStore.getSegmentsByID(this.props.id)[0].upvoted? true:false}
+                        onClick={ ()=> {
+                            DataStore.upvoteSegment(this.props.id);
+                        }}
+                        style={{
+                            marginBottom: "20px"
+                        }}
+                    >Upvote</button>
+                </div>
             )
-            var upvoteButton = (
-                <button 
-                    type="button" 
-                    className="btn btn-large btn-success"
-                    ref={"upvotebtn"+this.props.id}
-                    disabled={DataStore.getSegmentsByID(this.props.id)[0].upvoted? true:false}
-                    onClick={ ()=> {
-                        DataStore.upvoteSegment(this.props.id);
-                    }}
-                    style={{
-                        marginBottom: "20px"
-                    }}
-                >Upvote</button>
+        } else {
+            var date = (
+                <h4 style={{
+                    width: "70%",
+                    display: "inline",
+                    marginBottom: "10px",
+                }}><Moment format="DD/MM/YYYY">{DataStore.getSegmentsByID(this.props.id)[0].createdAt}</Moment></h4>
             )
-        } 
+        }
         return ( 
             <div
                 className="container panel panel-default"
@@ -52,15 +71,19 @@ export default class ActiveCommentSegment extends React.Component {
                     paddingTop: "10px",
                 }}
             >
-                <h4 style={{
-                    width: "70%",
-                    display: "inline",
-                }}><Moment format="DD/MM/YYYY h:mm a">{DataStore.getSegmentsByID(this.props.id)[0].createdAt}</Moment></h4>
-                {upvoteBadge}
-                <p style={{
-                    marginTop: "10px"
-                }}>{DataStore.getSegmentsByID(this.props.id)[0].comment}</p>
-                {upvoteButton}
+                {date}
+
+                <div
+                    className="col-md-11"
+                    style={{
+                        paddingLeft:"0"
+                    }}
+                >
+                    <p style={{
+                    }}>{DataStore.getSegmentsByID(this.props.id)[0].comment}</p>
+                </div>
+
+                {upvote}
             </div>
         );
     }
