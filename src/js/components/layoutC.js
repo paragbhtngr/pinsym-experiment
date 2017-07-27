@@ -90,8 +90,16 @@ export default class Layout extends React.Component {
                         color: "lightGrey",
                     }}>{this.state.mode} </h3>
                     <h3> <i className="fa fa-user-circle-o" aria-hidden="true"></i> {this.props.match.params.client} </h3>
-                    <hr/>
-                     {this.getActiveComments()} 
+                    <br/>
+                    <div
+                        style={{
+                            background: "lightGrey",
+                            padding: "20px",
+                            margin: "-20px",
+                        }}
+                    >
+                        {this.getActiveComments()}
+                    </div>
                 </div>
                 <div
                     className="container col-md-8 panel"
