@@ -88,7 +88,10 @@ export default class ActiveCommentSegment extends React.Component {
                 >   
                     {date}
                     <p style={{
-                    }}>{DataStore.getSegmentsByID(this.props.id)[0].comment}</p>
+                        wordBreak: "break-word",
+                    }}>{DataStore.getSegmentsByID(this.props.id)[0].comment.split('\n').map((item, key) => {
+                        return <span key={key}>{item}<br/></span>
+                    })}</p>
                 </div>
 
                 {upvote}

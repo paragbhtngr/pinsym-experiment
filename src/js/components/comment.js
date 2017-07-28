@@ -62,6 +62,7 @@ export default class Comment extends React.Component {
                 {date}
                 <p style={{
                     width: "95%",
+                    wordBreak: "break-word",
                 }}>{DataStore.getParagraphsByID(this.props.id)[0].comment.substr(0,150) + "..."}</p>
                 {upvoteBadge}
             </div>

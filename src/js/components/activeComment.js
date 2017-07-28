@@ -97,7 +97,8 @@ export default class ActiveComment extends React.Component {
                     }}
                 >
                     {date}                    
-                    <p style={{                      
+                    <p style={{
+                        wordBreak: "break-word",                      
                     }}>{this.state.data.comment.split('\n').map((item, key) => {
                             return <span key={key}>{item}<br/></span>
                         })}</p>
